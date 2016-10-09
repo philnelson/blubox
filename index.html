@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>BLUBOX 0.1 ALPHA</title>
+</head>
+
+<body>
+    <h1>blubox 0.1 alpha</h1>
+
+    <div id="player" style="border-radius:10px;"></div>
+    
+    <p>last updated <span class="last-update"></span> from <a href="https://labs.metafilter.com/recent-youtube-posts" title="Metafilter Labs: Recent YouTube Links in MetaFilter Posts">Recent YouTube Links in MetaFilter Posts</a>. Learn more.</p>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script>
+        var player;
+        var loadingState;
+        var video_list;
+
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/player_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            $(document).ready(function() {
+
+                $.getJSON("videos.json", function(data) {
+
+                    video_list = [];
+                    
+                    last_updated = data.updated_at;
+                    
+                    $('.last-update').text(last_updated);
+
+                    for (i in data.videos) {
+                        if (i < 11) {
+                            if (i > 0) {
+                                video_list.push(data.videos[i].id);
+                            }
+                        }
+
+                    }
+
+                    player = new YT.Player('player', {
+                        width: 640,
+                        height: 360,
+                        //videoId: data[0].id,
+
+                        playerVars: {
+                            color: 'white',
+                            //playlist: video_list,
+                            modestbranding: 1,
+                            autoplay: 1,
+                        },
+                        events: {
+                            'onReady': onPlayerReady,
+                            'onStateChange': onPlayerStateChange,
+                        }
+                    });
+
+                });
+            });
+        }
+
+        function onPlayerReady(event) {
+
+            player.cuePlaylist(video_list);
+
+        }
+
+        function onPlayerStateChange(event) {
+
+        }
+    </script>
+</body>
+
+</html>  
