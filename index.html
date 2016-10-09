@@ -2,11 +2,26 @@
 <html>
 
 <head>
-    <title>BLUBOX 0.1 ALPHA</title>
+    <title>blubox 0.1 alpha extreme turbo</title>
     <style>
         body {
             font-family: monospace;
-            font-size: 1.1em;
+            text-align: center;
+            background: #eee;
+        }
+        
+        p {
+            color: #333;
+        }
+        
+        h1 {
+            margin-top: 0;
+            color: #065a8f;
+            padding: 12px;
+        }
+        
+        h1 span {
+            color: #000000;
         }
         
         /* With regards to https://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php */
@@ -16,6 +31,8 @@
         	padding-bottom: 56.25%; /* 16:9 */
         	padding-top: 25px;
         	height: 0;
+        	max-width: 1080px;
+        	margin: auto;
         }
         
         #player-wrapper iframe {
@@ -24,12 +41,13 @@
         	left: 0;
         	width: 100%;
         	height: 100%;
+        	max-height: 608px;
         }
     </style>
 </head>
 
 <body>
-    <h1>blubox 0.1 alpha</h1>
+    <h1>blu<span>box</span></h1>
 
     <div id="player-wrapper">
         <div id="player" style="border-radius:10px;"></div>
